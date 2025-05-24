@@ -2,7 +2,7 @@
 
 variable "region" {
   description = "The AWS region to create resources in."
-  default     = "us-west-2"
+  default     = "eu-west-3"
 }
 
 # Networking Configuration
