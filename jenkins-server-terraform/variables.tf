@@ -51,7 +51,7 @@ variable "instance_type" {
 
 variable "key_name" {
   description = "The name of the SSH key pair to access the instance."
-  default     = "devsecops-project"
+  default     = "devsecops"
 }
 
 # IAM Role
@@ -59,4 +59,11 @@ variable "key_name" {
 variable "iam_role_name" {
   description = "The IAM role name for jenkins instance."
   default     = "jenkins-server-iam-role"
+}
+
+# Elastic IP
+
+variable "allocate_elastic_ip" {
+  description = "Set to true to allocate and associate an Elastic IP with the EC2 instance."
+  default     = true
 }

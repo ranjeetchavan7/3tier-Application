@@ -34,11 +34,22 @@ resource "aws_instance" "ec2" {
   }
 }
 
+# Elastic IP resource (conditionally created)
+resource "aws_eip" "ec2_eip" {
+  count = var.allocate_elastic_ip ? 1 : 0
+
+  instance = aws_instance.ec2.id
+
+  tags = {
+    Name = "${var.instance_name}-eip"
+  }
+}
+
 # Outputs to access instance details after creation
 output "instance_id" {
   value = aws_instance.ec2.id
 }
 
 output "instance_public_ip" {
-  value = aws_instance.ec2.public_ip
+  value = var.allocate_elastic_ip ? aws_eip.ec2_eip[0].public_ip : aws_instance.ec2.public_ip
 }
